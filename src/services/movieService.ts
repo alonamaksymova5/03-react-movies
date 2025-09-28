@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Movie } from "../types/movie";
+import type { Movie } from "../types/movie";
 
 export async function fetchMovies(movieQuery: string): Promise<Movie[]> {
   const url = "https://api.themoviedb.org/3/search/movie";
@@ -12,7 +12,7 @@ export async function fetchMovies(movieQuery: string): Promise<Movie[]> {
       page: 1,
     },
     headers: {
-      Authorization: `Bearer твійТокен`,
+      Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
     },
   });
 
