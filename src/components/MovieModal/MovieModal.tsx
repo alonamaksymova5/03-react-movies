@@ -3,13 +3,12 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import type { Movie } from "../../types/movie";
 
-interface ModalProps {
-  isOpen: boolean;
+interface MovieModalProps {
   movie: Movie;
   onClose: () => void;
 }
 
-export default function MovieModal({ isOpen, movie, onClose }: ModalProps) {
+export default function MovieModal({ movie, onClose }: MovieModalProps) {
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -17,8 +16,6 @@ export default function MovieModal({ isOpen, movie, onClose }: ModalProps) {
   };
 
   useEffect(() => {
-    if (!isOpen) return;
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
@@ -32,7 +29,7 @@ export default function MovieModal({ isOpen, movie, onClose }: ModalProps) {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [isOpen, onClose]);
+  }, [onClose]);
 
   return createPortal(
     <div
